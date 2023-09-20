@@ -1,6 +1,7 @@
 package com.kevo.displaydemo
 
 import android.os.Bundle
+import android.view.Display
 import android.view.Menu
 import android.view.MenuItem
 import com.google.android.material.snackbar.Snackbar
@@ -13,11 +14,16 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.appcompat.app.AppCompatActivity
 import com.kevo.displaydemo.databinding.ActivityMainBinding
+import com.kevo.displaydemo.ui.secondarydisplay.BasePresentation
+import com.kevo.displaydemo.ui.secondarydisplay.PresentationHelper
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), PresentationHelper.Listener {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+
+    private lateinit var presentationHelper: PresentationHelper
+    private var preso: BasePresentation? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +60,18 @@ class MainActivity : AppCompatActivity() {
             setupActionBarWithNavController(navController, appBarConfiguration)
             it.setupWithNavController(navController)
         }
+
+        presentationHelper = PresentationHelper(this, this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        presentationHelper.onResume()
+    }
+
+    override fun onPause() {
+        presentationHelper.onPause()
+        super.onPause()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -82,5 +100,15 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    override fun showPreso(display: Display) {
+        preso = BasePresentation(this, display)
+        preso?.show()
+    }
+
+    override fun clearPreso(showInLine: Boolean) {
+        preso?.dismiss()
+        preso = null
     }
 }

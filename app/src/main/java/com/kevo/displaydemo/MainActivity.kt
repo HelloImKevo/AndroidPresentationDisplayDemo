@@ -43,7 +43,11 @@ class MainActivity : AppCompatActivity(), PresentationHelper.Listener {
         binding.navView?.let {
             appBarConfiguration = AppBarConfiguration(
                 setOf(
-                    R.id.nav_transform, R.id.nav_reflow, R.id.nav_slideshow, R.id.nav_settings
+                    R.id.nav_transform,
+                    R.id.nav_admob,
+                    R.id.nav_reflow,
+                    R.id.nav_slideshow,
+                    R.id.nav_settings
                 ),
                 binding.drawerLayout
             )
@@ -54,7 +58,10 @@ class MainActivity : AppCompatActivity(), PresentationHelper.Listener {
         binding.appBarMain.contentMain.bottomNavView?.let {
             appBarConfiguration = AppBarConfiguration(
                 setOf(
-                    R.id.nav_transform, R.id.nav_reflow, R.id.nav_slideshow
+                    R.id.nav_transform,
+                    R.id.nav_admob,
+                    R.id.nav_reflow,
+                    R.id.nav_slideshow
                 )
             )
             setupActionBarWithNavController(navController, appBarConfiguration)

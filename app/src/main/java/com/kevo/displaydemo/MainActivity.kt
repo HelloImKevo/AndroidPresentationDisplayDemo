@@ -14,8 +14,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.appcompat.app.AppCompatActivity
 import com.kevo.displaydemo.databinding.ActivityMainBinding
-import com.kevo.displaydemo.ui.secondarydisplay.BasePresentation
 import com.kevo.displaydemo.ui.secondarydisplay.PresentationHelper
+import com.kevo.displaydemo.ui.secondarydisplay.SimplePresentationFragment
 
 class MainActivity : AppCompatActivity(), PresentationHelper.Listener {
 
@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity(), PresentationHelper.Listener {
     private lateinit var binding: ActivityMainBinding
 
     private lateinit var presentationHelper: PresentationHelper
-    private var preso: BasePresentation? = null
+    private var preso: SimplePresentationFragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -103,11 +103,11 @@ class MainActivity : AppCompatActivity(), PresentationHelper.Listener {
     }
 
     override fun showPreso(display: Display) {
-        preso = BasePresentation(this, display)
-        preso?.show()
+        preso = SimplePresentationFragment(this, display)
+        preso!!.show(supportFragmentManager, SimplePresentationFragment.TAG)
     }
 
-    override fun clearPreso(showInLine: Boolean) {
+    override fun clearPreso() {
         preso?.dismiss()
         preso = null
     }

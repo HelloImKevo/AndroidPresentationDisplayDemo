@@ -44,6 +44,8 @@ android {
 dependencies {
     implementation("com.google.android.material:material:1.4.0")
 
+    implementation("com.google.android.gms:play-services-ads:21.5.0")
+
     implementation("androidx.core:core-ktx:1.5.0")
     implementation("androidx.appcompat:appcompat:1.3.0")
     implementation("androidx.recyclerview:recyclerview:1.2.0")

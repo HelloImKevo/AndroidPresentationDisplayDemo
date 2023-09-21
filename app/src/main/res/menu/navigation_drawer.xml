@@ -9,6 +9,10 @@
             android:icon="@drawable/ic_camera_black_24dp"
             android:title="@string/menu_transform" />
         <item
+            android:id="@+id/nav_admob"
+            android:icon="@drawable/ic_admin_building_24dp"
+            android:title="@string/menu_admob" />
+        <item
             android:id="@+id/nav_reflow"
             android:icon="@drawable/ic_gallery_black_24dp"
             android:title="@string/menu_reflow" />

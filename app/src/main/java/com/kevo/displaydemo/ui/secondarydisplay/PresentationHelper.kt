@@ -28,7 +28,7 @@ class PresentationHelper(val context: Context, val listener: Listener): DisplayL
 
     // Do housekeeping to clear the current display and unregister ourself from the DisplayManager
     fun onPause() {
-        listener.clearPreso(false)
+        listener.clearPreso()
         currentDisplay = null
         manager?.unregisterDisplayListener(this)
     }
@@ -52,13 +52,11 @@ class PresentationHelper(val context: Context, val listener: Listener): DisplayL
         if (displays.isEmpty()) {
             // No valid display is connected so clear the current presentation if we haven't already
             if (currentDisplay != null || isFirstRun) {
-                listener.clearPreso(true)
+                listener.clearPreso()
                 currentDisplay = null
             }
         } else {
             // At least one valid secondary display is present for us to setup
-            // TODO test if this code still runs if there is only 1 display (the main one)
-            //  ideally it doesn't
             val newDisplay: Display = displays[0]
 
             if (newDisplay.isValid) {
@@ -68,14 +66,14 @@ class PresentationHelper(val context: Context, val listener: Listener): DisplayL
                     currentDisplay = newDisplay
                 } else if (currentDisplay?.displayId != newDisplay.displayId) {
                     // The new display is valid and an the old one needs to be cleared
-                    listener.clearPreso(true)
+                    listener.clearPreso()
                     listener.showPreso(newDisplay)
                     currentDisplay = newDisplay
                 }
             } else if (currentDisplay != null) {
                 // The new display is invalid (possibly disconnected) so we must assume there are
                 // no good displays and clear the current one
-                listener.clearPreso(true)
+                listener.clearPreso()
                 currentDisplay = null
             }
         }
@@ -99,7 +97,7 @@ class PresentationHelper(val context: Context, val listener: Listener): DisplayL
     interface Listener {
         fun showPreso(display: Display)
 
-        fun clearPreso(showInLine: Boolean)
+        fun clearPreso()
     }
 
     companion object {

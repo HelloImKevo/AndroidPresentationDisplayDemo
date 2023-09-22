@@ -18,6 +18,12 @@
         tools:layout="@layout/fragment_admob" />
 
     <fragment
+        android:id="@+id/nav_carousel"
+        android:name="com.kevo.displaydemo.ui.carousel.CarouselFragment"
+        android:label="@string/menu_carousel"
+        tools:layout="@layout/fragment_carousel" />
+
+    <fragment
         android:id="@+id/nav_reflow"
         android:name="com.kevo.displaydemo.ui.reflow.ReflowFragment"
         android:label="@string/menu_reflow"

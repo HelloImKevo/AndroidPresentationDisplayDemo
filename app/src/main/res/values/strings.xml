@@ -9,6 +9,7 @@
 
     <string name="menu_transform">Transform</string>
     <string name="menu_admob">AdMob</string>
+    <string name="menu_carousel">Carousel</string>
     <string name="menu_reflow">Reflow</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="menu_settings">Settings</string>

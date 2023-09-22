@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity(), PresentationHelper.Listener {
                 setOf(
                     R.id.nav_transform,
                     R.id.nav_admob,
+                    R.id.nav_carousel,
                     R.id.nav_reflow,
                     R.id.nav_slideshow,
                     R.id.nav_settings
@@ -60,6 +61,7 @@ class MainActivity : AppCompatActivity(), PresentationHelper.Listener {
                 setOf(
                     R.id.nav_transform,
                     R.id.nav_admob,
+                    R.id.nav_carousel,
                     R.id.nav_reflow,
                     R.id.nav_slideshow
                 )

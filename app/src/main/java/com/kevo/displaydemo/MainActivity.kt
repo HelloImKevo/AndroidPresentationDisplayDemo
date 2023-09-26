@@ -4,20 +4,25 @@ import android.os.Bundle
 import android.view.Display
 import android.view.Menu
 import android.view.MenuItem
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.navigation.NavigationView
+import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.navigation.NavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.kevo.displaydemo.databinding.ActivityMainBinding
+import com.kevo.displaydemo.service.ServiceManager
+import com.kevo.displaydemo.ui.BaseActivity
 import com.kevo.displaydemo.ui.secondarydisplay.PresentationHelper
 import com.kevo.displaydemo.ui.secondarydisplay.SimplePresentationFragment
+import com.kevo.displaydemo.util.DeviceHelper
 
-class MainActivity : AppCompatActivity(), PresentationHelper.Listener {
+class MainActivity : BaseActivity(), PresentationHelper.Listener {
+
+    override val TAG: String = "MainActivity"
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
@@ -52,6 +57,11 @@ class MainActivity : AppCompatActivity(), PresentationHelper.Listener {
                 ),
                 binding.drawerLayout
             )
+
+            // FIXME: This isn't working ...
+            // Update Nav Drawer subtitle to show the Device Family Identifier
+            it.findViewById<TextView>(R.id.nav_header_subtitle)?.text =
+                    DeviceHelper.generateDeviceFamilyIdentifier()
             setupActionBarWithNavController(navController, appBarConfiguration)
             it.setupWithNavController(navController)
         }
@@ -75,6 +85,7 @@ class MainActivity : AppCompatActivity(), PresentationHelper.Listener {
 
     override fun onResume() {
         super.onResume()
+        ServiceManager.getInstance().startAccessoryDisplayService(application)
         presentationHelper.onResume()
     }
 
@@ -112,7 +123,7 @@ class MainActivity : AppCompatActivity(), PresentationHelper.Listener {
     }
 
     override fun showPreso(display: Display) {
-        preso = SimplePresentationFragment(this, display)
+        preso = SimplePresentationFragment(this, themeResourceId, display)
         preso!!.show(supportFragmentManager, SimplePresentationFragment.TAG)
     }
 

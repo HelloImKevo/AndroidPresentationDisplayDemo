@@ -2,10 +2,16 @@
     <string name="app_name">Android Presentation Display Demo</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_title">Device Family</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+
+    <!-- Secondary Accessory Display -->
+    <string name="notification_accessorydisplayservice_channel_name">Accessory Display Service Status</string>
+    <string name="notification_accessorydisplayservice_content_title">Accessory Display</string>
+    <string name="notification_accessorydisplayservice_content_text">Accessory Display Service Running</string>
+    <string name="notification_accessorydisplayservice_ticker">Starting Accessory Display Service</string>
 
     <string name="menu_transform">Transform</string>
     <string name="menu_admob">AdMob</string>

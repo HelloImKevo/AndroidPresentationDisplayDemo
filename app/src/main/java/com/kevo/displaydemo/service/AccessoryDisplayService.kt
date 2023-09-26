@@ -41,6 +41,8 @@ class AccessoryDisplayService : Service() {
 
     override fun onBind(intent: Intent): IBinder {
         Log.d(TAG, "onBind -> Service bound using $intent")
+        // TODO: Refine the Service implementation
+        isBound = true
         return ServiceBinder()
     }
 
@@ -61,6 +63,7 @@ class AccessoryDisplayService : Service() {
     }
 
     fun handleIntent(intent: Intent) {
+        // TODO: Support Intent handling for component communication relays
         Log.w(TAG, "Handling Intents is not supported yet ...")
     }
 

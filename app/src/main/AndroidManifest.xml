@@ -5,6 +5,7 @@
     <!-- Include required permissions for Google Mobile Ads to run. -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:allowBackup="true"
@@ -16,6 +17,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidPresentationDisplayDemo"
         tools:targetApi="31">
+
+        <!-- Accessory Display -->
+        <service
+            android:name=".service.AccessoryDisplayService"
+            android:exported="false" />
 
         <!--
         You can find your app ID in the AdMob UI. For android:value,

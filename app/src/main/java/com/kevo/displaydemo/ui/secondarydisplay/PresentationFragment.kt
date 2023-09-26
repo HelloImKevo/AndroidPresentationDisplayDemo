@@ -33,7 +33,7 @@ open class PresentationFragment : DialogFragment() {
             }
 
             /*
-            Currently, we must past a Theme Resource ID, and if we don't pass the right Theme
+            Currently, we must pass a Theme Resource ID, and if we don't pass the right Theme
             Resource ID, we will get an InflateException crash:
 
             Caused by: java.lang.IllegalArgumentException: The style on this component requires your app theme to be

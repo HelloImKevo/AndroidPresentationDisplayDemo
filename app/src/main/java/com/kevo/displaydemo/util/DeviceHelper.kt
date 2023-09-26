@@ -15,6 +15,8 @@ object DeviceHelper {
     @JvmStatic
     fun generateDeviceFamilyIdentifier() = "${Build.MANUFACTURER}/${Build.MODEL}"
 
+    // TODO: The Elo Z10 has the same device identifier. If we need to know whether the device
+    //  has a Customer Facing Display plugged in, we'll need to come up with a different solution.
     @JvmStatic
     fun isEloZ30(): Boolean = generateDeviceFamilyIdentifier().equals(
         "Elo Touch Solutions/15in-I-Series-4-USBC-V",

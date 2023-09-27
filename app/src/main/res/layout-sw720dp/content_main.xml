@@ -29,7 +29,10 @@
         android:contentDescription="@string/fab_content_description"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:backgroundTint="#f26a25"
+        app:maxImageSize="32dp"
+        app:srcCompat="@drawable/ic_fa_exclamation_triangle_fill"
+        app:tint="#fff" />
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"

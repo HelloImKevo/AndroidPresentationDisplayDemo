@@ -8,6 +8,8 @@ import android.util.Log
 import android.view.Display
 import androidx.fragment.app.DialogFragment
 
+// TODO: Need to figure out how to show the Soft Keyboard, which currently only works in
+//  the default "Screen Mirroring" mode
 open class PresentationFragment : DialogFragment() {
 
     private var display: Display? = null

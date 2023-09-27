@@ -1,10 +1,12 @@
 package com.kevo.displaydemo
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Display
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -12,13 +14,13 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.snackbar.Snackbar
 import com.kevo.displaydemo.databinding.ActivityMainBinding
 import com.kevo.displaydemo.service.ServiceManager
 import com.kevo.displaydemo.ui.BaseActivity
 import com.kevo.displaydemo.ui.secondarydisplay.PresentationHelper
 import com.kevo.displaydemo.ui.secondarydisplay.SimplePresentationFragment
 import com.kevo.displaydemo.util.DeviceHelper
+import com.kevo.displaydemo.util.SnackbarHelper
 
 class MainActivity : BaseActivity(), PresentationHelper.Listener {
 
@@ -37,15 +39,19 @@ class MainActivity : BaseActivity(), PresentationHelper.Listener {
         setSupportActionBar(binding.appBarMain.toolbar)
 
         binding.appBarMain.fab?.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            binding.containerFullScreenImage?.isVisible = true
+            SnackbarHelper.showLong(
+                binding.btnExitFullScreen ?: view,
+                "Showing full screen POS demo image"
+            )
         }
 
-        val navHostFragment =
-            (supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment?)!!
+        val navHostFragment: NavHostFragment = supportFragmentManager.findFragmentById(
+            R.id.nav_host_fragment_content_main
+        ) as NavHostFragment
         val navController = navHostFragment.navController
 
-        binding.navView?.let {
+        binding.appBarMain.contentMain.navView?.let {
             appBarConfiguration = AppBarConfiguration(
                 setOf(
                     R.id.nav_transform,
@@ -57,11 +63,6 @@ class MainActivity : BaseActivity(), PresentationHelper.Listener {
                 ),
                 binding.drawerLayout
             )
-
-            // FIXME: This isn't working ...
-            // Update Nav Drawer subtitle to show the Device Family Identifier
-            it.findViewById<TextView>(R.id.nav_header_subtitle)?.text =
-                    DeviceHelper.generateDeviceFamilyIdentifier()
             setupActionBarWithNavController(navController, appBarConfiguration)
             it.setupWithNavController(navController)
         }
@@ -78,6 +79,17 @@ class MainActivity : BaseActivity(), PresentationHelper.Listener {
             )
             setupActionBarWithNavController(navController, appBarConfiguration)
             it.setupWithNavController(navController)
+        }
+
+        binding.appBarMain.contentMain.navView?.let {
+            // Update Nav Drawer subtitle to show the Device Family Identifier
+            it.getHeaderView(0)?.findViewById<TextView>(R.id.nav_header_subtitle)?.text =
+                    DeviceHelper.generateDeviceFamilyIdentifier()
+        }
+
+        binding.btnExitFullScreen?.setOnClickListener {
+            Log.w(TAG, "Hiding the full screen image")
+            binding.containerFullScreenImage?.isVisible = false
         }
 
         presentationHelper = PresentationHelper(this, this)

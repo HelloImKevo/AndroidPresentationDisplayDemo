@@ -17,6 +17,7 @@ import com.google.android.material.navigation.NavigationView
 import com.kevo.displaydemo.databinding.ActivityMainBinding
 import com.kevo.displaydemo.service.ServiceManager
 import com.kevo.displaydemo.ui.BaseActivity
+import com.kevo.displaydemo.ui.secondarydisplay.CfdHelper
 import com.kevo.displaydemo.ui.secondarydisplay.PresentationHelper
 import com.kevo.displaydemo.ui.secondarydisplay.SimplePresentationFragment
 import com.kevo.displaydemo.util.DeviceHelper
@@ -106,6 +107,11 @@ class MainActivity : BaseActivity(), PresentationHelper.Listener {
         super.onPause()
     }
 
+    override fun onDestroy() {
+        CfdHelper.clearCommandQueue()
+        super.onDestroy()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val result = super.onCreateOptionsMenu(menu)
         // Using findViewById because NavigationView exists in different layout files
@@ -136,10 +142,12 @@ class MainActivity : BaseActivity(), PresentationHelper.Listener {
 
     override fun showPreso(display: Display) {
         preso = SimplePresentationFragment(this, themeResourceId, display)
+        CfdHelper.setPreso(preso)
         preso!!.show(supportFragmentManager, SimplePresentationFragment.TAG)
     }
 
     override fun clearPreso() {
+        CfdHelper.setPreso(null)
         preso?.dismiss()
         preso = null
     }

@@ -1,8 +1,8 @@
 package com.kevo.displaydemo.ui.secondarydisplay
 
 import android.util.Log
-import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
@@ -28,19 +28,27 @@ object CfdHelper {
     fun setPreso(newPreso: SimplePresentationFragment?) {
         preso = newPreso
         lifecycle = newPreso?.lifecycle
-        newPreso?.lifecycle?.addObserver(object : DefaultLifecycleObserver {
-            override fun onResume(owner: LifecycleOwner) {
-                // Start executing any queued jobs if there are any
-                if (commandQueue.isNotEmpty()) {
-                    Log.i(TAG, "Launching coroutines for ${commandQueue.size} tasks in queue")
+        newPreso?.lifecycle?.addObserver(object : LifecycleEventObserver {
+            override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
+                when (event) {
+                    Lifecycle.Event.ON_RESUME -> {
+                        // Start executing any queued jobs if there are any
+                        if (commandQueue.isNotEmpty()) {
+                            Log.i(TAG, "Launching coroutines for ${commandQueue.size} tasks in queue")
 
-                    owner.lifecycleScope.launch {
-                        // Iterate through the queue and launch a coroutine to complete each one
-                        for (runnable in commandQueue) {
-                            launch {
-                                runnable.run()
+                            source.lifecycleScope.launch {
+                                // Iterate through the queue and launch a coroutine to complete each one
+                                for (runnable in commandQueue) {
+                                    launch {
+                                        runnable.run()
+                                    }
+                                }
                             }
                         }
+                    }
+
+                    else -> {
+                        // no op
                     }
                 }
             }

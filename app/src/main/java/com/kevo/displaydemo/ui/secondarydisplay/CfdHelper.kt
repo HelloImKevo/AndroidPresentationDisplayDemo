@@ -7,6 +7,12 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 
+/**
+ * A singleton helper class that acts as the messenger between our UI and the customer facing
+ * display (CFD). If a Fragment (or any other UI controller) calls one of these [CfdHelper]
+ * methods while the CFD's [SimplePresentationFragment] is not ready yet. [CfdHelper] will queue
+ * that command and execute it in a coroutine later when the [SimplePresentationFragment] is ready.
+ */
 object CfdHelper {
 
     private const val TAG = "CfdHelper"

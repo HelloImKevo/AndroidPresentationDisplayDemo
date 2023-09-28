@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kevo.displaydemo.R
 import com.kevo.displaydemo.databinding.FragmentTransformBinding
 import com.kevo.displaydemo.databinding.ItemTransformBinding
+import com.kevo.displaydemo.ui.secondarydisplay.CfdHelper
 
 /**
  * Fragment that demonstrates a responsive layout pattern where the format of the content
@@ -45,6 +46,9 @@ class TransformFragment : Fragment() {
         transformViewModel.texts.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
+
+        CfdHelper.setText("Transform fragment wuz here")
+
         return root
     }
 
@@ -92,6 +96,9 @@ class TransformFragment : Fragment() {
             holder.imageView.setImageDrawable(
                 ResourcesCompat.getDrawable(holder.imageView.resources, drawables[position], null)
             )
+            holder.imageView.setOnClickListener {
+                CfdHelper.setText("Image at position $position clicked")
+            }
         }
     }
 

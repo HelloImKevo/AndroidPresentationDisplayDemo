@@ -56,6 +56,10 @@ class SimplePresentationFragment(
         _binding = null
     }
 
+    fun setText(newText: String) {
+        binding.secondScreenTextView.text = newText
+    }
+
     companion object {
 
         const val TAG = "SimplePresentationFragment"

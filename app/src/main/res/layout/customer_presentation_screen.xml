@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#e0e0e0">
+
+    <ImageView
+        android:id="@+id/image_right_panel"
+        android:layout_width="320dp"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="6dp"
+        android:contentDescription="@null"
+        android:scaleType="fitEnd"
+        android:src="@drawable/cart_with_products_example"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="#fae" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/example_screen_customer_order_total" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/image_right_panel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.10">
+
+        <TextView
+            android:id="@+id/second_screen_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hi I'm the secondary screen!"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Enter your Phone Number:"
+            android:textSize="14dp" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:hint="(909) 555-1234"
+            android:inputType="phone"
+            android:textSize="14sp" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/image_right_panel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.62">
+
+        <Button
+            android:id="@+id/btn_red"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#d91e18"
+            android:text="Red Button"
+            android:textSize="13sp" />
+
+        <Button
+            android:id="@+id/btn_yellow"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:backgroundTint="#f1c40f"
+            android:text="Yellow Button"
+            android:textSize="13sp" />
+
+        <Button
+            android:id="@+id/btn_green"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:backgroundTint="#26a65b"
+            android:text="Green Button"
+            android:textSize="13sp" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.constraintlayout.widget.ConstraintLayout>

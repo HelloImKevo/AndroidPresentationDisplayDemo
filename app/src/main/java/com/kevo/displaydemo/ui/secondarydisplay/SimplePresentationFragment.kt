@@ -7,7 +7,7 @@ import android.view.Display
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.kevo.displaydemo.databinding.SecondScreenLogoBinding
+import com.kevo.displaydemo.databinding.CustomerPresentationScreenBinding
 import com.kevo.displaydemo.util.SnackbarHelper
 
 /**
@@ -24,7 +24,7 @@ class SimplePresentationFragment(
     display: Display,
 ) : PresentationFragment() {
 
-    private var _binding: SecondScreenLogoBinding? = null
+    private var _binding: CustomerPresentationScreenBinding? = null
     private val binding get() = _binding!!
 
     init {
@@ -36,7 +36,7 @@ class SimplePresentationFragment(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = SecondScreenLogoBinding.inflate(inflater, container, false).apply {
+        _binding = CustomerPresentationScreenBinding.inflate(inflater, container, false).apply {
             btnRed.setOnClickListener {
                 SnackbarHelper.showLong(it, "You clicked the Red button")
             }

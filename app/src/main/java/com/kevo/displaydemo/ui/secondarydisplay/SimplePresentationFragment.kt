@@ -8,8 +8,8 @@ import android.view.Display
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.MainThread
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.kevo.displaydemo.R
@@ -108,11 +108,47 @@ class SimplePresentationFragment(
             SlideItem(Key.SampleAd4, R.drawable.sample_ad_4)
         )
 
+        // Add a copy of the last item to the beginning for our infinite scrolling setup
+        sliderImages.add(0, sliderImages.last())
+        // Add a copy of the first item to the end of the list
+        sliderImages.add(sliderImages.size, sliderImages[1])
+
         slidingImageAdapter = SlidingImageAdapter(sliderImages, infiniteSlidePager)
         viewPager.adapter = slidingImageAdapter
 
+        // Start the ViewPager2 at the second item in the list to compensate for our infinite
+        // scroll setup
+        viewPager.currentItem = 1
+
+        // Setup infinite scrolling for the ViewPager2
+        // Extract the recycler and layout manager used internally
+        val recyclerView = viewPager.getChildAt(0) as RecyclerView
+        val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+        val itemCount = viewPager.adapter?.itemCount ?: 0
+        // Every time a scroll occurs run our logic to determine if we need to loop around
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val firstItemVisible
+                        = layoutManager.findFirstVisibleItemPosition()
+                val lastItemVisible
+                        = layoutManager.findLastVisibleItemPosition()
+                if (firstItemVisible == (itemCount - 1) && dx > 0) {
+                    // Once we get to the fake first page that was placed at the end of our list set
+                    // the actual position to the real first page
+                    recyclerView.scrollToPosition(1)
+                } else if (lastItemVisible == 0 && dx < 0) {
+                    // Do the same thing for the other direction
+                    recyclerView.scrollToPosition(itemCount - 2)
+                }
+            }
+        })
+
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
+                // Reset timer so it doesn't interrupt user swipes
+                startOrResetTimer()
+
                 val item: SlideItem? = slidingImageAdapter.getItemAt(position)
                 // Useful for debugging
                 // Log.v(TAG, "Now showing item: ${item?.key}, ${item?.imageResId}")

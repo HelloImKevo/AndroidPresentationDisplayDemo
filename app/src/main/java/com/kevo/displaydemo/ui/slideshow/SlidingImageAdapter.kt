@@ -38,9 +38,6 @@ class SlidingImageAdapter(
     override fun onBindViewHolder(holder: SliderViewHolder, position: Int) {
         Log.v(TAG, "onBindViewHolder :: position $position items.size ${items.size}")
         holder.setImage(items[position])
-        if (position == items.size - 2) {
-            viewPager.post(extendCollectionRunnable)
-        }
     }
 
     private val extendCollectionRunnable = Runnable {

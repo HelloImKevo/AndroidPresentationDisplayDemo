@@ -35,3 +35,18 @@ https://stackoverflow.com/questions/64180082/adb-screenrecord-secondary-display-
 
 Link to `screenrecord` source code:  
 https://android.googlesource.com/platform/frameworks/av/+/refs/heads/master/cmds/screenrecord/screenrecord.cpp  
+
+## How to screencast with Genymobile screen copy
+`scrcpy` also supports a `--display` flag:
+```shell
+scrcpy --display 1
+```
+
+You can also record the secondary HDMI screen using `scrcpy` like:
+```shell
+scrcpy --display 1 --record ~/Desktop/recording.mp4
+```
+
+More details:  
+https://manpages.ubuntu.com/manpages/jammy/man1/scrcpy.1.html  
+https://github.com/Genymobile/scrcpy  

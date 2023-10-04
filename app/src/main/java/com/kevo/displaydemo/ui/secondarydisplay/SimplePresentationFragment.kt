@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.kevo.displaydemo.R
 import com.kevo.displaydemo.databinding.CustomerPresentationScreenBinding
+import com.kevo.displaydemo.ui.slideshow.InfiniteSlidePager
 import com.kevo.displaydemo.ui.slideshow.SlideItem
 import com.kevo.displaydemo.ui.slideshow.SlideItem.Key
 import com.kevo.displaydemo.ui.slideshow.SlidingImageAdapter
@@ -42,7 +43,7 @@ class SimplePresentationFragment(
     private val binding get() = _binding!!
 
     private lateinit var slidingImageAdapter: SlidingImageAdapter
-    private lateinit var viewPager: ViewPager2
+    private lateinit var infiniteSlidePager: InfiniteSlidePager
 
     private val foregroundEvents: CoroutineScope = MainScope()
     private var timer: Timer? = null
@@ -89,7 +90,9 @@ class SimplePresentationFragment(
     }
 
     private fun setupViewPager() = with(binding) {
-        viewPager = this.infiniteViewPager
+        val viewPager = this.infiniteViewPager.also {
+            infiniteSlidePager = InfiniteSlidePager(it)
+        }
 
         val sliderImages = mutableListOf<SlideItem>()
         sliderImages.add(
@@ -105,13 +108,9 @@ class SimplePresentationFragment(
             SlideItem(Key.SampleAd4, R.drawable.sample_ad_4)
         )
 
-        slidingImageAdapter = SlidingImageAdapter(sliderImages, viewPager)
+        slidingImageAdapter = SlidingImageAdapter(sliderImages, infiniteSlidePager)
         viewPager.adapter = slidingImageAdapter
 
-        viewPager.clipToPadding = false
-        viewPager.clipChildren = false
-        viewPager.offscreenPageLimit = 3
-        viewPager.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 val item: SlideItem? = slidingImageAdapter.getItemAt(position)
@@ -137,16 +136,10 @@ class SimplePresentationFragment(
         timer = Timer().apply {
             this.scheduleAtFixedRate(object : TimerTask() {
                 override fun run() {
-                    foregroundEvents.launch { transitionToNextSlide() }
+                    foregroundEvents.launch { slidingImageAdapter.transitionToNextSlide() }
                 }
             }, AUTOMATIC_SLIDE_INTERVAL, AUTOMATIC_SLIDE_INTERVAL)
         }
-    }
-
-    @MainThread
-    private fun transitionToNextSlide() {
-        Log.d(TAG, "Sliding to item ... ${viewPager.currentItem + 1}")
-        viewPager.currentItem = viewPager.currentItem + 1
     }
 
     companion object {

@@ -6,26 +6,23 @@
     android:layout_height="match_parent"
     android:background="#e0e0e0">
 
-    <ImageView
+    <View
         android:id="@+id/image_right_panel"
         android:layout_width="320dp"
         android:layout_height="match_parent"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="6dp"
-        android:contentDescription="@null"
-        android:scaleType="fitEnd"
-        android:src="@drawable/cart_with_products_example"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:background="#fae" />
 
-    <ImageView
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/infinite_view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitCenter"
-        android:src="@drawable/example_screen_customer_order_total" />
+        android:layout_height="match_parent" />
 
+    <!-- TODO: Either hide this when irrelevant slides are shown, or remove it altogether -->
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -62,6 +59,7 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/btn_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"

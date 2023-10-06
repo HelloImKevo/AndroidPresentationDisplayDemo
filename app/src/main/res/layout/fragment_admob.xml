@@ -7,6 +7,19 @@
     tools:context=".ui.admob.AdMobFragment">
 
     <Button
+        android:id="@+id/btn_show_full_screen_image"
+        android:layout_width="380dp"
+        android:layout_height="74dp"
+        android:text="@string/show_full_screen_pos"
+        android:textSize="@dimen/btn_large_text"
+        app:backgroundTint="#f26a25"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.10" />
+
+    <Button
         android:id="@+id/next_level_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,9 +35,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.25">
 
         <!-- view for AdMob Interstitial Ad -->
         <TextView

@@ -9,9 +9,9 @@
             android:icon="@drawable/ic_camera_black_24dp"
             android:title="@string/menu_transform" />
         <item
-            android:id="@+id/nav_reflow"
-            android:icon="@drawable/ic_gallery_black_24dp"
-            android:title="@string/menu_reflow" />
+            android:id="@+id/nav_carousel"
+            android:icon="@drawable/ic_calendar_24dp"
+            android:title="@string/menu_carousel" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_slideshow_black_24dp"

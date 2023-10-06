@@ -8,26 +8,20 @@
     <fragment
         android:id="@+id/nav_transform"
         android:name="com.kevo.displaydemo.ui.transform.TransformFragment"
-        android:label="@string/menu_transform"
+        android:label="Point of Sale Test Harness - Transform"
         tools:layout="@layout/fragment_transform" />
 
     <fragment
         android:id="@+id/nav_admob"
         android:name="com.kevo.displaydemo.ui.admob.AdMobFragment"
-        android:label="@string/menu_admob"
+        android:label="Point of Sale Test Harness - AdMob"
         tools:layout="@layout/fragment_admob" />
 
     <fragment
         android:id="@+id/nav_carousel"
         android:name="com.kevo.displaydemo.ui.carousel.CarouselFragment"
-        android:label="@string/menu_carousel"
+        android:label="Point of Sale Test Harness - Carousel"
         tools:layout="@layout/fragment_carousel" />
-
-    <fragment
-        android:id="@+id/nav_reflow"
-        android:name="com.kevo.displaydemo.ui.reflow.ReflowFragment"
-        android:label="@string/menu_reflow"
-        tools:layout="@layout/fragment_reflow" />
 
     <fragment
         android:id="@+id/nav_slideshow"

@@ -31,7 +31,7 @@ class MainActivity : BaseActivity(), PresentationHelper.Listener {
     private lateinit var binding: ActivityMainBinding
 
     private lateinit var presentationHelper: PresentationHelper
-    private var preso: SimplePresentationFragment? = null
+    private var presentationScreen: SimplePresentationFragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +58,6 @@ class MainActivity : BaseActivity(), PresentationHelper.Listener {
                     R.id.nav_transform,
                     R.id.nav_admob,
                     R.id.nav_carousel,
-                    R.id.nav_reflow,
                     R.id.nav_slideshow,
                     R.id.nav_settings
                 ),
@@ -74,7 +73,6 @@ class MainActivity : BaseActivity(), PresentationHelper.Listener {
                     R.id.nav_transform,
                     R.id.nav_admob,
                     R.id.nav_carousel,
-                    R.id.nav_reflow,
                     R.id.nav_slideshow
                 )
             )
@@ -89,11 +87,16 @@ class MainActivity : BaseActivity(), PresentationHelper.Listener {
         }
 
         binding.btnExitFullScreen?.setOnClickListener {
-            Log.w(TAG, "Hiding the full screen image")
+            Log.i(TAG, "Hiding the full screen image")
             binding.containerFullScreenImage?.isVisible = false
         }
 
         presentationHelper = PresentationHelper(this, this)
+    }
+
+    fun showFullScreenImage() {
+        Log.i(TAG, "Showing the full screen POS image")
+        binding.containerFullScreenImage?.isVisible = true
     }
 
     override fun onResume() {
@@ -141,14 +144,14 @@ class MainActivity : BaseActivity(), PresentationHelper.Listener {
     }
 
     override fun showPreso(display: Display) {
-        preso = SimplePresentationFragment(this, themeResourceId, display)
-        CfdHelper.setPreso(preso)
-        preso!!.show(supportFragmentManager, SimplePresentationFragment.TAG)
+        presentationScreen = SimplePresentationFragment(this, themeResourceId, display)
+        CfdHelper.setPreso(presentationScreen)
+        presentationScreen!!.show(supportFragmentManager, SimplePresentationFragment.TAG)
     }
 
     override fun clearPreso() {
         CfdHelper.setPreso(null)
-        preso?.dismiss()
-        preso = null
+        presentationScreen?.dismiss()
+        presentationScreen = null
     }
 }

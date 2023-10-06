@@ -5,9 +5,11 @@ import androidx.annotation.DrawableRes
 data class SlideItem(val key: Key, @DrawableRes val imageResId: Int) {
 
     enum class Key {
-        CustomerOrderEntry,
+        CustomerOrderEntry2,
+        CustomerOrderEntry3,
+        CustomerOrderEntry4,
         LoyaltyPhone,
-        ReceiptSelection,
-        SampleAd4
+        VisaTapPay,
+        ReceiptSelection
     }
 }

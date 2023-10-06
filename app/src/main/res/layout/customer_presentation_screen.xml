@@ -22,78 +22,38 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <!-- TODO: Either hide this when irrelevant slides are shown, or remove it altogether -->
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/image_right_panel"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.10">
+    <!-- This is for prototyping purposes only - it serves no other use than to make layout editing more efficient -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@null"
+        android:visibility="gone"
+        tools:src="@drawable/example_screen_customer_order_total"
+        tools:visibility="visible" />
 
-        <TextView
-            android:id="@+id/second_screen_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hi I'm the secondary screen!"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/overlays"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:text="Enter your Phone Number:"
-            android:textSize="14dp" />
+        <include
+            android:id="@+id/customer_order_total"
+            layout="@layout/overlay_customer_order_total"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:layout_width="240dp"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:hint="(909) 555-1234"
-            android:inputType="phone"
-            android:textSize="14sp" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
+        <include
+            android:id="@+id/loyalty_phone"
+            layout="@layout/overlay_loyalty_phone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:visibility="gone" />
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/btn_container"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/image_right_panel"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.62">
-
-        <Button
-            android:id="@+id/btn_red"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#d91e18"
-            android:text="Red Button"
-            android:textSize="13sp" />
-
-        <Button
-            android:id="@+id/btn_yellow"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:backgroundTint="#f1c40f"
-            android:text="Yellow Button"
-            android:textSize="13sp" />
-
-        <Button
-            android:id="@+id/btn_green"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:backgroundTint="#26a65b"
-            android:text="Green Button"
-            android:textSize="13sp" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
+        <include
+            android:id="@+id/receipt_selection"
+            layout="@layout/overlay_receipt_selection"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:visibility="gone" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

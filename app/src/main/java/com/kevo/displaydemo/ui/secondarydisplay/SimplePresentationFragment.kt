@@ -6,9 +6,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Display
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -18,7 +18,6 @@ import com.kevo.displaydemo.ui.slideshow.InfiniteSlidePager
 import com.kevo.displaydemo.ui.slideshow.SlideItem
 import com.kevo.displaydemo.ui.slideshow.SlideItem.Key
 import com.kevo.displaydemo.ui.slideshow.SlidingImageAdapter
-import com.kevo.displaydemo.util.SnackbarHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
@@ -41,6 +40,7 @@ class SimplePresentationFragment(
 
     private var _binding: CustomerPresentationScreenBinding? = null
     private val binding get() = _binding!!
+    private var overlays: Overlays? = null
 
     private lateinit var slidingImageAdapter: SlidingImageAdapter
     private lateinit var infiniteSlidePager: InfiniteSlidePager
@@ -57,16 +57,11 @@ class SimplePresentationFragment(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = CustomerPresentationScreenBinding.inflate(inflater, container, false).apply {
-            btnRed.setOnClickListener {
-                SnackbarHelper.showLong(it, "You clicked the Red button")
-            }
-            btnYellow.setOnClickListener {
-                SnackbarHelper.showLong(it, "You clicked the Yellow button")
-            }
-            btnGreen.setOnClickListener {
-                SnackbarHelper.showLong(it, "You clicked the Green button")
-            }
+        _binding = CustomerPresentationScreenBinding.inflate(inflater, container, false)
+        overlays = Overlays(binding).also {
+            it.setupCustomerOrderTotal(touchListener)
+            it.setupLoyaltyPhone(touchListener)
+            it.setupReceiptSelection(touchListener)
         }
 
         setupViewPager()
@@ -87,6 +82,7 @@ class SimplePresentationFragment(
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        overlays = null
     }
 
     private fun setupViewPager() = with(binding) {
@@ -96,16 +92,22 @@ class SimplePresentationFragment(
 
         val sliderImages = mutableListOf<SlideItem>()
         sliderImages.add(
-            SlideItem(Key.CustomerOrderEntry, R.drawable.example_screen_customer_order_total)
+            SlideItem(Key.CustomerOrderEntry2, R.drawable.example_screen_customer_order_total_2)
         )
         sliderImages.add(
             SlideItem(Key.LoyaltyPhone, R.drawable.example_screen_loyalty_phone)
         )
         sliderImages.add(
-            SlideItem(Key.ReceiptSelection, R.drawable.example_screen_receipt_selection)
+            SlideItem(Key.CustomerOrderEntry3, R.drawable.example_screen_customer_order_total_3)
         )
         sliderImages.add(
-            SlideItem(Key.SampleAd4, R.drawable.sample_ad_4)
+            SlideItem(Key.VisaTapPay, R.drawable.example_screen_visa_tap_pay)
+        )
+        sliderImages.add(
+            SlideItem(Key.CustomerOrderEntry4, R.drawable.example_screen_customer_order_total_4)
+        )
+        sliderImages.add(
+            SlideItem(Key.ReceiptSelection, R.drawable.example_screen_receipt_selection)
         )
 
         // Add a copy of the last item to the beginning for our infinite scrolling setup
@@ -153,16 +155,31 @@ class SimplePresentationFragment(
                 // Useful for debugging
                 // Log.v(TAG, "Now showing item: ${item?.key}, ${item?.imageResId}")
                 when (item?.key) {
-                    Key.CustomerOrderEntry -> btnContainer.isVisible = true
+                    Key.CustomerOrderEntry2,
+                    Key.CustomerOrderEntry3,
+                    Key.CustomerOrderEntry4 ->
+                        this@SimplePresentationFragment.overlays?.showCustomerOrderTotal()
 
-                    else -> btnContainer.isVisible = false
+                    Key.LoyaltyPhone ->
+                        this@SimplePresentationFragment.overlays?.showLoyaltyPhone()
+
+                    Key.ReceiptSelection ->
+                        this@SimplePresentationFragment.overlays?.showReceiptSelection()
+
+                    else -> this@SimplePresentationFragment.overlays?.hideAll()
                 }
             }
         })
     }
 
     fun setText(newText: String) {
-        binding.secondScreenTextView.text = newText
+        overlays?.customerOrderTotal?.secondScreenTextView?.text = newText
+    }
+
+    private val touchListener = View.OnTouchListener { v: View?, _: MotionEvent ->
+        startOrResetTimer()
+        v?.performClick()
+        false
     }
 
     private fun startOrResetTimer() {
@@ -181,6 +198,6 @@ class SimplePresentationFragment(
     companion object {
 
         const val TAG = "SimplePresentFragment"
-        private const val AUTOMATIC_SLIDE_INTERVAL = 3_000L
+        private const val AUTOMATIC_SLIDE_INTERVAL = 10_000L
     }
 }

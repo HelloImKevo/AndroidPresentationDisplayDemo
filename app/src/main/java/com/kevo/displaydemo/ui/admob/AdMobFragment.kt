@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest
@@ -19,6 +18,7 @@ import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.kevo.displaydemo.R
 import com.kevo.displaydemo.databinding.FragmentAdmobBinding
+import com.kevo.displaydemo.ui.BaseFragment
 import java.util.Locale
 
 // Remove the line below after defining your own ad unit ID.
@@ -27,7 +27,7 @@ private const val TOAST_TEXT = "Test ads are being shown. " +
         "with your own ad unit ID."
 private const val START_LEVEL = 1
 
-class AdMobFragment : Fragment() {
+class AdMobFragment : BaseFragment() {
 
     private var _binding: FragmentAdmobBinding? = null
 
@@ -47,7 +47,7 @@ class AdMobFragment : Fragment() {
     ): View {
         // TODO: Do something with it
         val viewModel =
-            ViewModelProvider(this).get(AdMobViewModel::class.java)
+                ViewModelProvider(this).get(AdMobViewModel::class.java)
 
         _binding = FragmentAdmobBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -71,6 +71,10 @@ class AdMobFragment : Fragment() {
         // Toasts the test ad message on the screen. Remove this after defining your own ad unit ID.
         Toast.makeText(requireActivity(), TOAST_TEXT, Toast.LENGTH_LONG).show()
 
+        binding.btnShowFullScreenImage.setOnClickListener {
+            showFullScreenImage()
+        }
+
         return root
     }
 
@@ -91,7 +95,7 @@ class AdMobFragment : Fragment() {
                     interstitialAd = ad
                     nextLevelButton.isEnabled = true
                     Toast.makeText(requireActivity(), "onAdLoaded()", Toast.LENGTH_SHORT)
-                        .show()
+                            .show()
                     ad.fullScreenContentCallback = object : FullScreenContentCallback() {
                         override fun onAdDismissedFullScreenContent() {
                             // Called when fullscreen content is dismissed.
@@ -155,6 +159,7 @@ class AdMobFragment : Fragment() {
     }
 
     companion object {
+
         private const val TAG = "AdMobFragment"
     }
 }

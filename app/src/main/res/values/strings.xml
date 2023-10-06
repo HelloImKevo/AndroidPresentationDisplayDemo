@@ -15,7 +15,6 @@
     <string name="menu_transform">Transform</string>
     <string name="menu_admob">AdMob</string>
     <string name="menu_carousel">Carousel</string>
-    <string name="menu_reflow">Reflow</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="menu_settings">Settings</string>
 
@@ -38,4 +37,5 @@
         For more information, see https://support.google.com/admob/answer/3052638
     <!- -->
     <string name="interstitial_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="show_full_screen_pos">Show Full Screen POS</string>
 </resources>

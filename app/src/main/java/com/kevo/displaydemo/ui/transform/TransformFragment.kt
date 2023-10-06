@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -15,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kevo.displaydemo.R
 import com.kevo.displaydemo.databinding.FragmentTransformBinding
 import com.kevo.displaydemo.databinding.ItemTransformBinding
+import com.kevo.displaydemo.ui.BaseFragment
 import com.kevo.displaydemo.ui.secondarydisplay.CfdHelper
 
 /**
@@ -23,7 +23,7 @@ import com.kevo.displaydemo.ui.secondarydisplay.CfdHelper
  * the [RecyclerView] using LinearLayoutManager in a small screen
  * and shows items using GridLayoutManager in a large screen.
  */
-class TransformFragment : Fragment() {
+class TransformFragment : BaseFragment() {
 
     private var _binding: FragmentTransformBinding? = null
 
@@ -47,6 +47,10 @@ class TransformFragment : Fragment() {
             adapter.submitList(it)
         }
 
+        binding.btnShowFullScreenImage?.setOnClickListener {
+            showFullScreenImage()
+        }
+
         CfdHelper.setText("Transform fragment wuz here")
 
         return root
@@ -61,10 +65,10 @@ class TransformFragment : Fragment() {
         ListAdapter<String, TransformViewHolder>(object : DiffUtil.ItemCallback<String>() {
 
             override fun areItemsTheSame(oldItem: String, newItem: String): Boolean =
-                oldItem == newItem
+                    oldItem == newItem
 
             override fun areContentsTheSame(oldItem: String, newItem: String): Boolean =
-                oldItem == newItem
+                    oldItem == newItem
         }) {
 
         private val drawables = listOf(

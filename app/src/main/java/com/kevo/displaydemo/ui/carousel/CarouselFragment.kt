@@ -9,16 +9,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.MainThread
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.kevo.displaydemo.databinding.FragmentCarouselBinding
+import com.kevo.displaydemo.ui.BaseFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import java.util.Timer
 import java.util.TimerTask
 
-class CarouselFragment : Fragment() {
+class CarouselFragment : BaseFragment() {
 
     private var _binding: FragmentCarouselBinding? = null
 
@@ -42,6 +42,10 @@ class CarouselFragment : Fragment() {
         _binding = FragmentCarouselBinding.inflate(inflater, container, false)
 
         setupCarousel()
+
+        binding.btnShowFullScreenImage.setOnClickListener {
+            showFullScreenImage()
+        }
 
         return binding.root
     }

@@ -63,13 +63,13 @@ class Overlays(binding: CustomerPresentationScreenBinding) {
         customerOrderTotal.btnAnnouncement.setOnClickListener {
             SnackbarHelper.showLong(
                 it,
-                "Merchants can customize announcements to be shown in this component"
+                "Merchants can upload their own image or this can be an integration to Google Ads as a revenue stream"
             )
         }
         customerOrderTotal.btnCart.setOnClickListener {
             SnackbarHelper.showLong(
                 it,
-                "This Cart element would mirror the contents that the merchant is actively adding to the customer's order"
+                "The cart would mirror the contents that the merchant is actively adding to the customer's order"
             )
         }
     }
@@ -86,7 +86,7 @@ class Overlays(binding: CustomerPresentationScreenBinding) {
         loyaltyPhone.btnKeypad.setOnClickListener {
             SnackbarHelper.showLong(
                 it,
-                "Customers can enter their phone number to redeem loyalty rewards"
+                "Customers can enter their phone number to join the loyalty program and redeem rewards"
             )
         }
     }

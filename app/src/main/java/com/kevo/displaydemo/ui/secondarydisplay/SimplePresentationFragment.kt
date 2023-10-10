@@ -121,6 +121,7 @@ class SimplePresentationFragment(
         // Start the ViewPager2 at the second item in the list to compensate for our infinite
         // scroll setup
         viewPager.currentItem = 1
+        this@SimplePresentationFragment.overlays?.showCustomerOrderTotal()
 
         // Setup infinite scrolling for the ViewPager2
         // Extract the recycler and layout manager used internally
@@ -198,6 +199,6 @@ class SimplePresentationFragment(
     companion object {
 
         const val TAG = "SimplePresentFragment"
-        private const val AUTOMATIC_SLIDE_INTERVAL = 10_000L
+        private const val AUTOMATIC_SLIDE_INTERVAL = 20_000L
     }
 }

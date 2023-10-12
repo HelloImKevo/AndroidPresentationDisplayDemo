@@ -10,6 +10,7 @@ data class SlideItem(val key: Key, @DrawableRes val imageResId: Int) {
         CustomerOrderEntry4,
         LoyaltyPhone,
         VisaTapPay,
-        ReceiptSelection
+        ReceiptSelection,
+        BankAd
     }
 }

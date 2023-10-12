@@ -109,6 +109,9 @@ class SimplePresentationFragment(
         sliderImages.add(
             SlideItem(Key.ReceiptSelection, R.drawable.example_screen_receipt_selection)
         )
+        sliderImages.add(
+            SlideItem(Key.BankAd, R.drawable.example_screen_bank_ad)
+        )
 
         // Add a copy of the last item to the beginning for our infinite scrolling setup
         sliderImages.add(0, sliderImages.last())
